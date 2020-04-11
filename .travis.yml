@@ -13,3 +13,11 @@ after_success:
     - docker build -t lu97is/dtp-client ./frontend
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     - docker push lu97is/dtp-client
+
+deploy:
+    provider: firebase
+    token:
+        secure: $FIREBASE_AUTH_TOKEN
+    message: "Deploying to firebase..."
+    on:
+        branch: master
