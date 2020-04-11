@@ -1,0 +1,36 @@
+language: trusty
+sudo: required
+matrix:
+  include:
+    - language: generic
+      services:
+        - docker
+      before_install:
+        - docker build -t lu97is/dtp-client -f Dockerfile.dev .
+      
+      script:
+          - docker run -e CI=true lu97is/dtp-client npm test
+      
+      after_success:
+        - docker build -t lu97is/dtp-client .
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+        - test $TRAVIS_BRANCH = 'master' && docker push lu97is/dtp-client    
+
+    - language: node_js
+      node_js:
+        node
+      install:
+        - npm install
+      script:
+        - npm run test -- --coverage
+      before_deploy:
+        - test $TRAVIS_BRANCH = 'master' && npm run isready
+        
+      deploy:
+        provider: firebase
+        token: $FIREBASE_AUTH_TOKEN
+        message: "Deploying to firebase..."
+        on:
+            branch: master
+notifications:
+  email: false
