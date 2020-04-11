@@ -1,6 +1,9 @@
 FROM node:alpine
+ARG FIREBASE_AUTH_TOKEN
 WORKDIR '/app'
-COPY ./package.json ./
+COPY package.json .
+RUN npm install -g firebase-tools
 RUN npm install
 COPY . .
-CMD ["npm", "run", "build"]
+RUN npm run build
+RUN firebase deploy --token $FIREBASE_AUTH_TOKEN
