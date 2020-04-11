@@ -19,6 +19,10 @@ matrix:
     - language: node_js
       node_js:
         node
+      install:
+        - npm install
+      script:
+        - npm run test -- --coverage
       before_deploy:
         - test $TRAVIS_BRANCH = 'master' && npm run isready
         
