@@ -10,10 +10,9 @@ script:
     - docker run -e CI=true lu97is/dtp-client npm test
 
 after_success:
-    - docker build -t lu97is/dtp-client ./frontend
+    - docker build -t lu97is/dtp-client .
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     - docker push lu97is/dtp-client
-
 deploy:
     provider: firebase
     token: $FIREBASE_AUTH_TOKEN
