@@ -1,0 +1,15 @@
+language: generic 
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t lu97is/dtp-client -f ./Dockerfile.dev .
+
+script:
+    - docker run -e CI=true lu97is/dtp-client npm test
+
+after_success:
+    - docker build -t lu97is/dtp-client ./frontend
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    - docker push lu97is/dtp-client
