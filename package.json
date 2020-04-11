@@ -36,8 +36,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "CI=true npm run lint",
-      "pre-push": "CI=true npm run test && npm run lint",
-      "postmerge": "(git-branch-is master && npm run isready)"
+      "pre-push": "CI=true npm run test && npm run lint"
     }
   },
   "browserslist": {

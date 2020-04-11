@@ -1,22 +1,30 @@
-language: generic 
+dist: trusty
 sudo: required
-services:
-    - docker
+matrix:
+  - language: generic 
+    services:
+        - docker
 
-before_install:
-    - docker build -t lu97is/dtp-client -f ./Dockerfile.dev .
+    before_install:
+        - docker build -t lu97is/dtp-client -f ./Dockerfile.dev .
 
-script:
-    - docker run -e CI=true lu97is/dtp-client npm test
+    script:
+        - docker run -e CI=true lu97is/dtp-client npm test
 
-after_success:
-    - docker build -t lu97is/dtp-client .
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker push lu97is/dtp-client
+    after_success:
+        - docker build -t lu97is/dtp-client .
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+        - docker push lu97is/dtp-client
+        - docker cp DOCKER_IMAGE_NAME:/app/bu /destination/on/host
+    
+  - language: node_js
+    script:
+      - npm run isready
+    deploy:
+      provider: firebase
+      token: $FIREBASE_AUTH_TOKEN
+      message: "Deploying to firebase..."
+      on:
+          branch: master
 
-deploy:
-    provider: firebase
-    token: $FIREBASE_AUTH_TOKEN
-    message: "Deploying to firebase..."
-    on:
-        branch: master
+    
