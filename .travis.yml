@@ -16,8 +16,7 @@ after_success:
 
 deploy:
     provider: firebase
-    token:
-        secure: $FIREBASE_AUTH_TOKEN
+    token: $FIREBASE_AUTH_TOKEN
     message: "Deploying to firebase..."
     on:
         branch: master
