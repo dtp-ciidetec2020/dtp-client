@@ -1,7 +1,8 @@
 language: generic 
 sudo: required
 env: 
-    - DOCKER_IMAGE_NAME= lu97is/dtp-client
+    global:
+        - DOCKER_IMAGE_NAME= lu97is/dtp-client
 services:
     - docker
     - nodejs
