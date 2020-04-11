@@ -1,18 +1,22 @@
 language: generic 
 sudo: required
+env: 
+    - DOCKER_IMAGE_NAME= lu97is/dtp-client
 services:
     - docker
+    - nodejs
 
 before_install:
-    - docker build -t lu97is/dtp-client -f ./Dockerfile.dev .
+    - docker build -t $DOCKER_IMAGE_NAME -f ./Dockerfile.dev .
 
 script:
-    - docker run -e CI=true lu97is/dtp-client npm test
+    - docker run -e CI=true $DOCKER_IMAGE_NAME npm test
 
 after_success:
-    - docker build -t lu97is/dtp-client .
+    - docker build -t $DOCKER_IMAGE_NAME .
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker push lu97is/dtp-client
+    - docker push $DOCKER_IMAGE_NAME
+    - docker cp DOCKER_IMAGE_NAME:/app/build /build
     - npm run build
 deploy:
     provider: firebase
