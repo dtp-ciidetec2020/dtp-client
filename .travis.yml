@@ -21,6 +21,7 @@ matrix:
     node_js:
       - node
     script:
+      - test $TRAVIS_BRANCH = 'master' &&
       - npm run deploy
     deploy:
       provider: firebase
