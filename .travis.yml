@@ -22,12 +22,12 @@ matrix:
       before_deploy:
         - test $TRAVIS_BRANCH = 'master' && npm run isready
         
-        deploy:
-          provider: firebase
-          token: $FIREBASE_AUTH_TOKEN
-          message: "Deploying to firebase..."
-          on:
-              branch: master
+      deploy:
+        provider: firebase
+        token: $FIREBASE_AUTH_TOKEN
+        message: "Deploying to firebase..."
+        on:
+            branch: master
 notifications:
   email: false
     
