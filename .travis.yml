@@ -16,11 +16,10 @@ matrix:
         - docker build -t lu97is/dtp-client .
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
         - docker push lu97is/dtp-client
-        - docker cp DOCKER_IMAGE_NAME:/app/bu /destination/on/host
     
   - language: node_js
     node_js:
-      - 
+      - node
     script:
       - npm run deploy
     deploy:
