@@ -2,12 +2,16 @@ import React from 'react';
 import { CustomButtonContainer } from './styled';
 
 type ButtonType = {
-  label: string;
-  handleClick: () => void;
+  label?: string;
+  handleClick?: () => void;
 };
 
 const CustomButton = ({ label, handleClick }: ButtonType) => {
-  return <CustomButtonContainer onClick={() => handleClick()}>{label}</CustomButtonContainer>;
+  return (
+    <CustomButtonContainer onClick={() => handleClick()}>
+      Button
+    </CustomButtonContainer>
+  );
 };
 
 export default CustomButton;
