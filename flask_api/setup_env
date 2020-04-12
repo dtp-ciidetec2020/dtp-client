@@ -1,0 +1,14 @@
+#!/bin/bash
+echo "ambientando..."
+echo "instando python3"
+sudo apt-get install python3
+echo "creando ambiente virtual python3"
+python3 -m venv venv
+echo "ambiente virtual creado"
+source venv/bin/activate
+echo "instalando el kit de desarrollo"
+pip3 install -r requirements.txt
+echo "todo listo"
+echo "ya puede ejecutar servidor python3 manage runserver"
+
+
