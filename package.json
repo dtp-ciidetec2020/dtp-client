@@ -13,12 +13,14 @@
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
     "@types/react-router-dom": "^5.1.4",
+    "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0",
     "styled-components-breakpoint": "^3.0.0-preview.20",
+    "tsparticles": "^1.12.10",
     "typeface-roboto": "0.0.75",
     "typescript": "^3.7.5"
   },
@@ -38,7 +40,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "CI=true npm run lint",
-      "pre-push": "CI=true npm run test --passWithNoTests && npm run lint"
+      "pre-push": "CI=true npm run lint"
     }
   },
   "browserslist": {

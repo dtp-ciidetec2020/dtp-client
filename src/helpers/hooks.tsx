@@ -25,3 +25,9 @@ export const useResize = () => {
     windowDimensions,
   };
 };
+
+export const useAuth = () => {
+  return {
+    isAuth: false,
+  };
+};

@@ -4,6 +4,6 @@ import Login from './View/Login';
 
 export default () => (
   <Switch>
-    <Route path="/" component={Login} />
+    <Route exact={true} path="/login" component={Login} />
   </Switch>
 );
