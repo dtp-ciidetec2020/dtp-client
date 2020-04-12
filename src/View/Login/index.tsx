@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { Grid, Typography, TextField } from '@material-ui/core';
-import { LoginContainer, BackgroundLogo, Form, FormContainer } from './styled';
-
+import { LoginContainer, BackgroundLogo, FormContainer } from './styled';
 import CidetecBackground from '../../images/bannerCidetec.png';
 import { useResize } from '../../helpers/hooks';
 import { Big, Medium } from '../../theme/spacing';
 import CustomButton from '../../components/CustomButton';
 import { Caller } from '../../api/request';
 import Animate from '../../components/Animate';
+import Form from '../../components/Form';
 
-type InputType = {
+export type InputType = {
   name: string;
+  type?: string;
 };
 
-const inputs: Array<InputType> = [{ name: 'username' }, { name: 'password' }];
+const inputs: Array<InputType> = [{ name: 'username' }, { name: 'password', type: 'password' }];
 
 const Login = () => {
   const { windowDimensions } = useResize();
@@ -35,7 +36,6 @@ const Login = () => {
   };
 
   return (
-
     <LoginContainer
       container
       justify="center"
@@ -56,9 +56,14 @@ const Login = () => {
               width: '80%',
             }}
           >
-            <Form elevation={5} onKeyDown={(e) => login()}>
+            <Form
+              width="80%"
+              height="100%"
+              elevation={5}
+              handleEnterPress={() => login()}
+            >
               <Typography variant="h5">Welcome</Typography>
-              {inputs.map(({ name }) => (
+              {inputs.map(({ name, type = 'string' }) => (
                 <TextField
                   style={{ marginTop: Big }}
                   key={name}
@@ -66,6 +71,7 @@ const Login = () => {
                   onChange={(e) => handleChange(e.target.value, name)}
                   fullWidth
                   label={name}
+                  type={type}
                   variant="outlined"
                 />
               ))}

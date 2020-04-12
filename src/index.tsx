@@ -8,7 +8,12 @@ import * as serviceWorker from './serviceWorker';
 import { palette } from './theme/palette';
 
 const Theme = createMuiTheme({
-  palette: palette.light
+  palette: palette.light,
+  typography: {
+    allVariants: {
+      fontFamily: 'Righteous'
+    }
+  }
 });
 
 ReactDOM.render(
